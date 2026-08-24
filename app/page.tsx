@@ -25,7 +25,7 @@ function Header() {
             포트폴리오
           </a>
           <a
-            href="https://ds-resume.vercel.app/"
+            href="https://ds-resume-ver2.vercel.app/"
             target="_blank"
             rel="noreferrer"
             className="rounded-full px-3 py-1.5 text-sm font-medium text-slate-600 transition-colors hover:text-slate-900"
@@ -41,7 +41,7 @@ function Header() {
 function Hero() {
   const contactLinks = [
     { label: '포트폴리오', href: 'https://ds-portfolio-white.vercel.app/' },
-    { label: '이력서', href: 'https://ds-resume.vercel.app/' },
+    { label: '이력서', href: 'https://ds-resume-ver2.vercel.app/' },
   ]
 
   return (
