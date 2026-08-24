@@ -1,20 +1,74 @@
+'use client'
+
+import { useCallback, useEffect, useState } from 'react'
+
+type Theme = 'light' | 'dark'
+
+function useTheme() {
+  const [theme, setTheme] = useState<Theme>('light')
+
+  useEffect(() => {
+    setTheme(document.documentElement.classList.contains('dark') ? 'dark' : 'light')
+  }, [])
+
+  useEffect(() => {
+    document.documentElement.classList.toggle('dark', theme === 'dark')
+    localStorage.setItem('theme', theme)
+  }, [theme])
+
+  const toggleTheme = useCallback(() => {
+    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'))
+  }, [])
+
+  return { theme, toggleTheme }
+}
+
+function ThemeToggle() {
+  const { theme, toggleTheme } = useTheme()
+  const isDark = theme === 'dark'
+
+  return (
+    <button
+      type="button"
+      onClick={toggleTheme}
+      aria-label={isDark ? '라이트 모드로 전환' : '다크 모드로 전환'}
+      className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 text-slate-600 transition hover:border-accent-300 hover:text-accent-600 dark:border-slate-700 dark:text-slate-300 dark:hover:border-accent-600 dark:hover:text-accent-400"
+    >
+      {isDark ? (
+        <svg viewBox="0 0 24 24" fill="none" strokeWidth={1.7} stroke="currentColor" className="h-[18px] w-[18px]">
+          <circle cx="12" cy="12" r="4.2" />
+          <path
+            strokeLinecap="round"
+            d="M12 2.5v2M12 19.5v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M2.5 12h2M19.5 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"
+          />
+        </svg>
+      ) : (
+        <svg viewBox="0 0 24 24" fill="none" strokeWidth={1.7} stroke="currentColor" className="h-[18px] w-[18px]">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M20.5 14.5A8.5 8.5 0 1 1 9.5 3.5a7 7 0 0 0 11 11Z" />
+        </svg>
+      )}
+    </button>
+  )
+}
+
 function SectionHeading({ eyebrow, title }: { eyebrow: string; title: string }) {
   return (
     <div className="mb-10 flex items-baseline gap-3 sm:mb-14">
-      <span className="font-mono text-sm font-medium text-accent-600">{eyebrow}</span>
-      <h2 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">{title}</h2>
-      <span className="h-px flex-1 bg-slate-200" aria-hidden />
+      <span className="font-mono text-sm font-medium text-accent-600 dark:text-accent-400">{eyebrow}</span>
+      <h2 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl dark:text-slate-100">{title}</h2>
+      <span className="h-px flex-1 bg-slate-200 dark:bg-slate-800" aria-hidden />
     </div>
   )
 }
 
 function Header() {
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-200/70 bg-white/80 backdrop-blur-md print:hidden">
-      <div className="mx-auto flex h-16 max-w-5xl items-center px-5 sm:px-8">
-        <a href="#top" className="font-mono text-sm font-semibold tracking-tight text-slate-900">
-          Jaebok<span className="text-accent-600">.</span>
+    <header className="sticky top-0 z-50 border-b border-slate-200/70 bg-white/80 backdrop-blur-md print:hidden dark:border-slate-800/70 dark:bg-slate-950/80">
+      <div className="mx-auto flex h-16 max-w-5xl items-center justify-between px-5 sm:px-8">
+        <a href="#top" className="font-mono text-sm font-semibold tracking-tight text-slate-900 dark:text-slate-100">
+          Jaebok<span className="text-accent-600 dark:text-accent-400">.</span>
         </a>
+        <ThemeToggle />
       </div>
     </header>
   )
@@ -32,17 +86,17 @@ function Hero() {
         <img
           src="/profile.jpeg"
           alt="이재복 프로필 사진"
-          className="aspect-4/5 w-28 shrink-0 rounded-2xl object-cover ring-1 ring-slate-200 sm:w-36"
+          className="aspect-4/5 w-28 shrink-0 rounded-2xl object-cover ring-1 ring-slate-200 sm:w-36 dark:ring-slate-800"
         />
 
         <div className="flex-1">
-          <p className="mb-3 font-mono text-sm font-medium text-accent-600">Data Scientist</p>
-          <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">경력기술서</h1>
-          <p className="mt-4 max-w-2xl text-base leading-relaxed text-slate-600 sm:text-lg">
+          <p className="mb-3 font-mono text-sm font-medium text-accent-600 dark:text-accent-400">Data Scientist</p>
+          <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl dark:text-slate-100">경력기술서</h1>
+          <p className="mt-4 max-w-2xl text-base leading-relaxed text-slate-600 sm:text-lg dark:text-slate-400">
             데이터를 분석하는 것에서 끝나지 않고, 실제 서비스에서 활용되어 고객과 비즈니스에 가치를 만들어내는 데이터 사이언티스트 이재복입니다.
           </p>
 
-          <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm text-slate-500">
+          <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm text-slate-500 dark:text-slate-400">
             <span>총 경력 2년 11개월</span>
             <span>전 직장 이에이엔테크놀로지</span>
             <span>서울 관악구</span>
@@ -52,7 +106,7 @@ function Hero() {
           <div className="mt-6 flex flex-wrap gap-3">
             <a
               href="mailto:j_be_@naver.com"
-              className="rounded-full border border-slate-200 px-4 py-1.5 text-sm font-medium text-slate-700 transition hover:border-accent-300 hover:text-accent-700"
+              className="rounded-full border border-slate-200 px-4 py-1.5 text-sm font-medium text-slate-700 transition hover:border-accent-300 hover:text-accent-700 dark:border-slate-700 dark:text-slate-300 dark:hover:border-accent-600 dark:hover:text-accent-400"
             >
               j_be_@naver.com
             </a>
@@ -62,7 +116,7 @@ function Hero() {
                 href={link.href}
                 target="_blank"
                 rel="noreferrer"
-                className="rounded-full border border-slate-200 px-4 py-1.5 text-sm font-medium text-slate-700 transition hover:border-accent-300 hover:text-accent-700"
+                className="rounded-full border border-slate-200 px-4 py-1.5 text-sm font-medium text-slate-700 transition hover:border-accent-300 hover:text-accent-700 dark:border-slate-700 dark:text-slate-300 dark:hover:border-accent-600 dark:hover:text-accent-400"
               >
                 {link.label} ↗
               </a>
@@ -85,14 +139,14 @@ function TechSummary() {
   ]
 
   return (
-    <section className="scroll-mt-20 bg-slate-50 px-5 py-16 sm:px-8 sm:py-20">
+    <section className="scroll-mt-20 bg-slate-50 px-5 py-16 sm:px-8 sm:py-20 dark:bg-slate-900/40">
       <div className="mx-auto max-w-5xl">
         <SectionHeading eyebrow="01" title="기술 요약" />
-        <div className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8">
+        <div className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 dark:border-slate-800 dark:bg-slate-950">
           <ul className="grid gap-3 sm:grid-cols-2">
             {items.map((item) => (
-              <li key={item} className="flex gap-2.5 text-sm leading-relaxed text-slate-600">
-                <span className="mt-0.5 shrink-0 text-accent-500">→</span>
+              <li key={item} className="flex gap-2.5 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+                <span className="mt-0.5 shrink-0 text-accent-500 dark:text-accent-400">→</span>
                 {item}
               </li>
             ))}
@@ -107,7 +161,10 @@ function TechTags({ items }: { items: string }) {
   return (
     <div className="mt-5 flex flex-wrap gap-1.5">
       {items.split(',').map((item) => (
-        <span key={item} className="rounded-md bg-slate-100 px-2.5 py-1 text-sm font-medium text-slate-800">
+        <span
+          key={item}
+          className="rounded-md bg-slate-100 px-2.5 py-1 text-sm font-medium text-slate-800 dark:bg-slate-800 dark:text-slate-200"
+        >
           {item.trim()}
         </span>
       ))}
@@ -137,39 +194,41 @@ function ProjectCard({
   techStack: string
 }) {
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8">
+    <div className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 dark:border-slate-800 dark:bg-slate-950">
       <div className="flex flex-wrap items-baseline justify-between gap-2">
-        <h4 className="text-lg font-bold text-slate-900">
-          <span className="mr-1 font-mono text-accent-600">{num}.</span>
+        <h4 className="text-lg font-bold text-slate-900 dark:text-slate-100">
+          <span className="mr-1 font-mono text-accent-600 dark:text-accent-400">{num}.</span>
           {title}
         </h4>
-        <span className="font-mono text-xs text-slate-400">{period}</span>
+        <span className="font-mono text-xs text-slate-400 dark:text-slate-500">{period}</span>
       </div>
 
       <div className="mt-3 flex flex-wrap items-center gap-2">
-        <span className="text-sm font-medium text-slate-500">{role}</span>
-        <span className="rounded-md bg-accent-50 px-2 py-1 text-xs font-semibold text-accent-700">
+        <span className="text-sm font-medium text-slate-500 dark:text-slate-400">{role}</span>
+        <span className="rounded-md bg-accent-50 px-2 py-1 text-xs font-semibold text-accent-700 dark:bg-accent-500/10 dark:text-accent-300">
           기여도 {contribution}
         </span>
       </div>
 
-      <p className="mt-4 leading-relaxed text-slate-600">{overview}</p>
+      <p className="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">{overview}</p>
 
       <div className="mt-6 grid gap-8 sm:grid-cols-2">
         <div>
-          <h5 className="mb-3 text-sm font-semibold tracking-wide text-slate-400 uppercase">주요 업무</h5>
+          <h5 className="mb-3 text-sm font-semibold tracking-wide text-slate-400 uppercase dark:text-slate-500">
+            주요 업무
+          </h5>
           <ul className="space-y-1.5">
             {tasks.map((task, i) =>
               task.sub ? (
                 <li
                   key={i}
-                  className="ml-3.5 border-l border-slate-200 pl-3 text-sm leading-relaxed text-slate-500"
+                  className="ml-3.5 border-l border-slate-200 pl-3 text-sm leading-relaxed text-slate-500 dark:border-slate-800 dark:text-slate-500"
                 >
                   {task.text}
                 </li>
               ) : (
-                <li key={i} className="flex gap-2 text-sm leading-relaxed text-slate-600">
-                  <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-slate-300" />
+                <li key={i} className="flex gap-2 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+                  <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-slate-300 dark:bg-slate-600" />
                   {task.text}
                 </li>
               ),
@@ -178,16 +237,18 @@ function ProjectCard({
         </div>
 
         <div>
-          <h5 className="mb-3 text-sm font-semibold tracking-wide text-slate-400 uppercase">주요 성과</h5>
+          <h5 className="mb-3 text-sm font-semibold tracking-wide text-slate-400 uppercase dark:text-slate-500">
+            주요 성과
+          </h5>
           <ul className="space-y-1.5">
             {achievements.map((a, i) => (
               <li
                 key={i}
                 className={`flex gap-2 text-sm leading-relaxed ${
-                  a.highlight ? 'font-semibold text-slate-900' : 'text-slate-600'
+                  a.highlight ? 'font-semibold text-slate-900 dark:text-slate-100' : 'text-slate-600 dark:text-slate-400'
                 }`}
               >
-                <span className="mt-0.5 shrink-0 text-accent-500">✓</span>
+                <span className="mt-0.5 shrink-0 text-accent-500 dark:text-accent-400">✓</span>
                 {a.text}
               </li>
             ))}
@@ -206,12 +267,12 @@ function CareerHistory() {
       <div className="mx-auto max-w-5xl">
         <SectionHeading eyebrow="02" title="Career" />
 
-        <ol className="relative space-y-14 border-l border-slate-200 pl-8">
+        <ol className="relative space-y-14 border-l border-slate-200 pl-8 dark:border-slate-800">
           <li className="relative">
-            <span className="absolute -left-[calc(2rem+5px)] top-1.5 h-2.5 w-2.5 rounded-full bg-accent-500 ring-4 ring-white" />
-            <p className="font-mono text-xs font-medium text-accent-600">2024.10 ~ 2026.06</p>
-            <h3 className="mt-1 text-lg font-bold text-slate-900">이에이엔테크놀로지</h3>
-            <p className="text-sm font-medium text-slate-500">Data Scientist</p>
+            <span className="absolute -left-[calc(2rem+5px)] top-1.5 h-2.5 w-2.5 rounded-full bg-accent-500 ring-4 ring-white dark:ring-slate-950" />
+            <p className="font-mono text-xs font-medium text-accent-600 dark:text-accent-400">2024.10 ~ 2026.06</p>
+            <h3 className="mt-1 text-lg font-bold text-slate-900 dark:text-slate-100">이에이엔테크놀로지</h3>
+            <p className="text-sm font-medium text-slate-500 dark:text-slate-400">Data Scientist</p>
 
             <div className="mt-6 space-y-5">
               <ProjectCard
@@ -341,10 +402,10 @@ function CareerHistory() {
           </li>
 
           <li className="relative">
-            <span className="absolute -left-[calc(2rem+5px)] top-1.5 h-2.5 w-2.5 rounded-full bg-accent-500 ring-4 ring-white" />
-            <p className="font-mono text-xs font-medium text-accent-600">2023.05 ~ 2024.06</p>
-            <h3 className="mt-1 text-lg font-bold text-slate-900">라임솔루션</h3>
-            <p className="text-sm font-medium text-slate-500">Data Analyst</p>
+            <span className="absolute -left-[calc(2rem+5px)] top-1.5 h-2.5 w-2.5 rounded-full bg-accent-500 ring-4 ring-white dark:ring-slate-950" />
+            <p className="font-mono text-xs font-medium text-accent-600 dark:text-accent-400">2023.05 ~ 2024.06</p>
+            <h3 className="mt-1 text-lg font-bold text-slate-900 dark:text-slate-100">라임솔루션</h3>
+            <p className="text-sm font-medium text-slate-500 dark:text-slate-400">Data Analyst</p>
 
             <div className="mt-6 space-y-5">
               <ProjectCard
@@ -379,10 +440,10 @@ function CareerHistory() {
 
 function Footer() {
   return (
-    <footer className="border-t border-slate-200 px-5 py-10 sm:px-8 print:hidden">
+    <footer className="border-t border-slate-200 px-5 py-10 sm:px-8 print:hidden dark:border-slate-800">
       <div className="mx-auto flex max-w-5xl flex-col items-center gap-4 text-center sm:flex-row sm:justify-between sm:text-left">
-        <p className="text-sm text-slate-500">이재복 · j_be_@naver.com · 010-6426-9707</p>
-        <a href="#top" className="text-sm font-medium text-slate-500 hover:text-accent-600">
+        <p className="text-sm text-slate-500 dark:text-slate-400">이재복 · j_be_@naver.com · 010-6426-9707</p>
+        <a href="#top" className="text-sm font-medium text-slate-500 hover:text-accent-600 dark:text-slate-400 dark:hover:text-accent-400">
           맨 위로 ↑
         </a>
       </div>
@@ -392,7 +453,7 @@ function Footer() {
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-white text-slate-900">
+    <div className="min-h-screen bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-100">
       <Header />
       <main>
         <Hero />

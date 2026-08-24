@@ -9,8 +9,14 @@ const URL = "http://localhost:3000";
 const browser = await puppeteer.launch({ headless: true });
 const page = await browser.newPage();
 
-await page.emulateMediaType("print");
 await page.goto(URL, { waitUntil: "networkidle0" });
+
+// PDF는 항상 라이트 테마로 출력
+await page.evaluate(() => {
+  document.documentElement.classList.remove("dark");
+});
+
+await page.emulateMediaType("print");
 
 await page.pdf({
   path: OUTPUT,
