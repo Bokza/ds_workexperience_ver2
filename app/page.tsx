@@ -68,7 +68,23 @@ function Header() {
         <a href="#top" className="font-mono text-sm font-semibold tracking-tight text-slate-900 dark:text-slate-100">
           Jaebok<span className="text-accent-600 dark:text-accent-400">.</span>
         </a>
-        <ThemeToggle />
+        <div className="flex items-center gap-2">
+          <nav className="hidden items-center gap-1 sm:flex">
+            <a
+              href="#technical-overview"
+              className="rounded-full px-3 py-1.5 text-sm font-medium text-slate-600 transition-colors hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100"
+            >
+              Technical Overview
+            </a>
+            <a
+              href="#work-experience"
+              className="rounded-full px-3 py-1.5 text-sm font-medium text-slate-600 transition-colors hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100"
+            >
+              Work Experience
+            </a>
+          </nav>
+          <ThemeToggle />
+        </div>
       </div>
     </header>
   )
@@ -93,7 +109,9 @@ function Hero() {
           <p className="mb-3 font-mono text-sm font-medium text-accent-600 dark:text-accent-400">Data Scientist</p>
           <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl dark:text-slate-100">경력기술서</h1>
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-slate-600 sm:text-lg dark:text-slate-400">
-            데이터를 분석하는 것에서 끝나지 않고, 실제 서비스에서 활용되어 고객과 비즈니스에 가치를 만들어내는 데이터 사이언티스트 이재복입니다.
+            데이터를 분석하는 것에서 끝나지 않고, 실제 서비스에서 활용되어 고객과
+            <br />
+            비즈니스에 가치를 만들어내는 데이터 사이언티스트 이재복입니다.
           </p>
 
           <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm text-slate-500 dark:text-slate-400">
@@ -139,9 +157,9 @@ function TechSummary() {
   ]
 
   return (
-    <section className="scroll-mt-20 bg-slate-50 px-5 py-16 sm:px-8 sm:py-20 dark:bg-slate-900/40">
+    <section id="technical-overview" className="scroll-mt-20 bg-slate-50 px-5 py-16 sm:px-8 sm:py-20 dark:bg-slate-900/40">
       <div className="mx-auto max-w-5xl">
-        <SectionHeading eyebrow="01" title="기술 요약" />
+        <SectionHeading eyebrow="01" title="Technical Overview" />
         <div className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 dark:border-slate-800 dark:bg-slate-950">
           <ul className="grid gap-3 sm:grid-cols-2">
             {items.map((item) => (
@@ -263,9 +281,9 @@ function ProjectCard({
 
 function CareerHistory() {
   return (
-    <section id="career" className="scroll-mt-20 px-5 py-16 sm:px-8 sm:py-20">
+    <section id="work-experience" className="scroll-mt-20 px-5 py-16 sm:px-8 sm:py-20">
       <div className="mx-auto max-w-5xl">
-        <SectionHeading eyebrow="02" title="Career" />
+        <SectionHeading eyebrow="02" title="Work Experience" />
 
         <ol className="relative space-y-14 border-l border-slate-200 pl-8 dark:border-slate-800">
           <li className="relative">
