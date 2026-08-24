@@ -11,28 +11,10 @@ function SectionHeading({ eyebrow, title }: { eyebrow: string; title: string }) 
 function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-slate-200/70 bg-white/80 backdrop-blur-md print:hidden">
-      <div className="mx-auto flex h-16 max-w-5xl items-center justify-between px-5 sm:px-8">
+      <div className="mx-auto flex h-16 max-w-5xl items-center px-5 sm:px-8">
         <a href="#top" className="font-mono text-sm font-semibold tracking-tight text-slate-900">
           Jaebok<span className="text-accent-600">.</span>
         </a>
-        <nav className="flex items-center gap-1">
-          <a
-            href="https://ds-portfolio-white.vercel.app/"
-            target="_blank"
-            rel="noreferrer"
-            className="rounded-full px-3 py-1.5 text-sm font-medium text-slate-600 transition-colors hover:text-slate-900"
-          >
-            포트폴리오
-          </a>
-          <a
-            href="https://ds-resume-ver2.vercel.app/"
-            target="_blank"
-            rel="noreferrer"
-            className="rounded-full px-3 py-1.5 text-sm font-medium text-slate-600 transition-colors hover:text-slate-900"
-          >
-            이력서
-          </a>
-        </nav>
       </div>
     </header>
   )
