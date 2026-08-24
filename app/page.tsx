@@ -13,7 +13,7 @@ function Header() {
     <header className="sticky top-0 z-50 border-b border-slate-200/70 bg-white/80 backdrop-blur-md print:hidden">
       <div className="mx-auto flex h-16 max-w-5xl items-center justify-between px-5 sm:px-8">
         <a href="#top" className="font-mono text-sm font-semibold tracking-tight text-slate-900">
-          이재복<span className="text-accent-600">.</span>
+          Jaebok<span className="text-accent-600">.</span>
         </a>
         <nav className="flex items-center gap-1">
           <a
@@ -57,7 +57,7 @@ function Hero() {
           <p className="mb-3 font-mono text-sm font-medium text-accent-600">Data Scientist</p>
           <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">경력기술서</h1>
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-slate-600 sm:text-lg">
-            건물 에너지·HVAC 도메인에서 예측, 이상 탐지, 강화학습, LLM Agent까지 프로덕션 단위로 만들어온 데이터 사이언티스트 이재복입니다.
+            문제 정의부터 모델 개발, 배포, 운영까지 — 건물 에너지 AI 서비스의 전 주기를 책임져온 데이터 사이언티스트 이재복입니다.
           </p>
 
           <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm text-slate-500">
@@ -307,7 +307,7 @@ function CareerHistory() {
               <ProjectCard
                 num={4}
                 title="DQN 기반 HVAC 자동 제어 시스템"
-                period="2025.12 ~ 2026.05"
+                period="2025.12 ~ 2026.06"
                 role="강화학습 시스템 설계 및 운영 자동화"
                 contribution="100%"
                 overview="심층 강화학습(DQN) 기반 HVAC 설정온도 자동 제어 시스템 개발"
@@ -329,7 +329,7 @@ function CareerHistory() {
                   { text: '유사 외기온도 기준 비교군 검증 수행' },
                   { text: 'HVAC 실내기 15대 자동 제어 운영 적용' },
                 ]}
-                techStack="PyTorch, RL(DQN), Airflow"
+                techStack="PyTorch, RL(DQN), BentoML, MLflow, Airflow"
               />
 
               <ProjectCard
