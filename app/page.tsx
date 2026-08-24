@@ -74,13 +74,13 @@ function Header() {
               href="#technical-overview"
               className="rounded-full px-3 py-1.5 text-sm font-medium text-slate-600 transition-colors hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100"
             >
-              Technical Overview
+              Summary
             </a>
             <a
               href="#work-experience"
               className="rounded-full px-3 py-1.5 text-sm font-medium text-slate-600 transition-colors hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100"
             >
-              Work Experience
+              Career
             </a>
           </nav>
           <ThemeToggle />
@@ -159,7 +159,7 @@ function TechSummary() {
   return (
     <section id="technical-overview" className="scroll-mt-20 bg-slate-50 px-5 py-16 sm:px-8 sm:py-20 dark:bg-slate-900/40">
       <div className="mx-auto max-w-5xl">
-        <SectionHeading eyebrow="01" title="Technical Overview" />
+        <SectionHeading eyebrow="01" title="Summary" />
         <div className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 dark:border-slate-800 dark:bg-slate-950">
           <ul className="grid gap-3 sm:grid-cols-2">
             {items.map((item) => (
@@ -283,7 +283,7 @@ function CareerHistory() {
   return (
     <section id="work-experience" className="scroll-mt-20 px-5 py-16 sm:px-8 sm:py-20">
       <div className="mx-auto max-w-5xl">
-        <SectionHeading eyebrow="02" title="Work Experience" />
+        <SectionHeading eyebrow="02" title="Career" />
 
         <ol className="relative space-y-14 border-l border-slate-200 pl-8 dark:border-slate-800">
           <li className="relative">
