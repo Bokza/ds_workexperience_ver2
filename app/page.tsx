@@ -57,7 +57,7 @@ function Hero() {
           <p className="mb-3 font-mono text-sm font-medium text-accent-600">Data Scientist</p>
           <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">경력기술서</h1>
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-slate-600 sm:text-lg">
-            문제 정의부터 모델 개발, 배포, 운영까지 — 건물 에너지 AI 서비스의 전 주기를 책임져온 데이터 사이언티스트 이재복입니다.
+            현장의 문제를 데이터로 정의하고, 실제로 활용되는 AI 서비스로 구현하는 데이터 사이언티스트 이재복입니다.
           </p>
 
           <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm text-slate-500">
